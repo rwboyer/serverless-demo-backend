@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "alias": ["demo-backend-serverless.now.sh"],
+  "builds": [{ "src": "**/*.js", "use": "@now/node" }],
+  "routes": [
+    {
+      "src": "/users/(?<id>[^/]*)",
+      "dest": "src/api/users/find.js?id=$id"
+    },
+    {
+      "src": "/users",
+      "dest": "src/api/users/add.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/users",
+      "dest": "src/api/users/update.js",
+      "methods": ["PUT"]
+    },
+    {
+      "src": "/users",
+      "dest": "src/api/users/find.js"
+    }
+  ]
+}
