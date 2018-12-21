@@ -1,4 +1,4 @@
-const { flow } = require("lodash");
+const { compose } = require("lodash/fp");
 const useJson = require("../../hof/response/json");
 const useTime = require("../../hof/time/log");
 const waitFor = require("../../hof/time/sleep");
@@ -8,8 +8,8 @@ const useSendStatus = require("../../hof/response/send-status");
 // mock users
 const users = require("../../mocks/users");
 
-const wrapper = flow(
-  useTime,
+const wrapper = compose(
+  useTime("update user"),
   useSendStatus,
   waitFor(1000),
   useJson,

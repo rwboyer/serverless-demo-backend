@@ -2,19 +2,19 @@ const { compose } = require("lodash/fp");
 const useBody = require("../../hof/request/body-parser");
 const useSendStatus = require("../../hof/response/send-status");
 const useTime = require("../../hof/time/log");
-const waitFor = require("../../hof/time/sleep");
-
-// mock users
-const users = require("../../mocks/users");
+const useNoSQL = require("../../hof/request/mongo");
 
 const fn = async (req, res) => {
-  users.push(req.body);
-  return res.sendStatus(200);
+  const book = req.body;
+
+  // req.noSql because in useNoSQL I set field
+  await req.noSql.movies.insert(book);
+  return res.sendStatus(201);
 };
 
 module.exports = compose(
-  useTime("add user"),
-  waitFor(3000),
+  useTime("add movie"),
   useBody,
-  useSendStatus
+  useSendStatus,
+  useNoSQL({ field: "noSql" })
 )(fn);

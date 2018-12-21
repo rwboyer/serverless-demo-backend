@@ -4,5 +4,5 @@ module.exports = fn => async (req, res) => {
     res.end();
   };
 
-  return fn(req, res);
+  await fn(req, res);
 };

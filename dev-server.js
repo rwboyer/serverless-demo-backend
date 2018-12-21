@@ -1,4 +1,4 @@
-const { merge } = require("lodash");
+const { merge } = require("lodash/fp");
 const url = require("url");
 const { glob } = require("glob");
 const { routes } = require("./now.json");

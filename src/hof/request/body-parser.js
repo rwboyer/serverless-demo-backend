@@ -3,5 +3,5 @@ const { json } = require("micro");
 module.exports = fn => async (req, res) => {
   req.body = await json(req);
 
-  return fn(req, res);
+  await fn(req, res);
 };
